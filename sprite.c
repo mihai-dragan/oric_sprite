@@ -22,7 +22,6 @@ void setup() {
 byte* chr = (byte*)0x9900;  // pointer to ASCII characters
 byte* achr = (byte*)0x9d00; // pointer to alternative characters
 
-#define byte unsigned char
 byte alien_w1[8] = { 82,76,94,109,127,76,82,82 };
 byte alien_w2[8] = { 82,76,94,109,127,76,82,97 };
 
