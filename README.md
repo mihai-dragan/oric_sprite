@@ -14,9 +14,9 @@ For more information of how the HIRES screen memory is organized and how each by
         byte i;
         byte offst = cnum<<3;
         for(i=0;i<8;i++) {
-            int j = (i<<5)+(i<<3);
-            byte* addr = (byte*)haddr+j;
+            byte* addr = (byte*)haddr;
             *addr = 64+chr[offst+i];
+            haddr=haddr+40;
         }
     }
 
