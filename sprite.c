@@ -28,9 +28,9 @@ byte alien_w2[8] = { 82,76,94,109,127,76,82,97 };
 void draw_spr(byte spr[8], int haddr) {
     byte i;
     for(i=0;i<8;i++) {
-        int j = (i<<5)+(i<<3);
-        byte* addr = (byte*)haddr+j;
+        byte* addr = (byte*)haddr;
         *addr = spr[i];
+        haddr=haddr+40;
     }
 }
 
@@ -38,9 +38,9 @@ void draw_char(byte cnum, int haddr) {
     byte i;
     byte offst = cnum<<3;
     for(i=0;i<8;i++) {
-        int j = (i<<5)+(i<<3);
-        byte* addr = (byte*)haddr+j;
+        byte* addr = (byte*)haddr;
         *addr = 64+chr[offst+i];
+        haddr=haddr+40;
     }
 }
 
@@ -48,9 +48,9 @@ void draw_achar(byte cnum, int haddr) {
     byte i;
     byte offst = cnum<<3;
     for(i=0;i<8;i++) {
-        int j = (i<<5)+(i<<3);
-        byte* addr = (byte*)haddr+j;
+        byte* addr = (byte*)haddr;
         *addr = 64+achr[offst+i];
+        haddr=haddr+40;
     }
 }
 
@@ -77,16 +77,12 @@ void main() {
             }
         }
         
-        goal = clock () + CLOCKS_PER_SEC/20;
+        goal = clock () + CLOCKS_PER_SEC/10;
         while ((long) (goal - clock ()) > 0) ;
         
         if(kbhit()>0) {
             c = cgetc();
             if(c==CH_ESC) return;
-            /*if(c==CH_CURS_UP) move_up();
-            if(c==CH_CURS_DOWN) move_down();
-            if(c==CH_CURS_LEFT) move_left();
-            if(c==CH_CURS_RIGHT) move_right();*/
         }
     }
 }
