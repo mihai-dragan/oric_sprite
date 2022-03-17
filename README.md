@@ -8,6 +8,7 @@ Previously I attempted to use the cc65 Oric tgi libraries, but those are just ca
 So, I removed the tgi code and just used assembler to go into HIRES mode with `asm("jsr $EC33");`. Later I found a bit of code int the [8bit Unity library](https://github.com/8bit-Dude/8bit-Unity) that initializes HIRES correctly for Oric 1 and Oric Atmos. You can find all the initializations in the `setup()` procedure.
 
 Then I tried to just put characters from the character table to the HIRES screen, but found out that they are laid out differently, because the HIRES byte, although it contains just 6 pixels like the character fonts, they have a set flag on the second bit, so we have to also set this flag on each byte of the character table by adding binary 01000000 (or decimal 64).
+For more information of how the HIRES screen memory is organized and how each byte stores information about the draw mode and for six pixels OR color attributes, look [here](https://osdk.org/index.php?page=articles&ref=ART9).
 
     void draw_char(byte cnum, int haddr) {
         byte i;
