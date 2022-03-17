@@ -23,6 +23,10 @@ Then I tried to just put characters from the character table to the HIRES screen
 
 To get the address of the character we want to draw, we have to multiply the character number `cnum` with 8, because each character is made of 8 bytes: `byte offst = cnum<<3;`
 
-Each byte forms a line of six pixels, but to draw the next line exactly under it we have to multiply the line number by 40 (the number of bytes on a screen line): `int j = (i<<5)+(i<<3);`
+Each byte forms a line of six pixels, but to draw the next line exactly under it we have to skip 40 bytes (the number of bytes on a screen line).
 
-The shift `>>` or `<<` operations in the above code are probably an unnecessary optimisation for the multiplications needed (you can find more about this [here](https://www.geeksforgeeks.org/multiplication-two-numbers-shift-operator/)). I think the compiler would do this anyway, but just to be shure we do it because Oric's CPU is very slow at multiplying.
+The shift `>>` or `<<` operations in the above code are probably an unnecessary optimisation for the multiplications needed (you can find more about this [here](https://www.geeksforgeeks.org/multiplication-two-numbers-shift-operator/)). I think the compiler would do this anyway, but just to be sure we do it because Oric's CPU is very slow at multiplying. LATER EDIT: I managed to replace multiplications with numbers that are not powers of two, replacing them with repeated addition in the for loop. Also checked the generated assembler code and indeed, multiplications with powers of two are replaced with shifts by the compiler.
+
+The sprite drawing procedure is very similar to that for the characters, but we put the flag bit "on" in the sprite itself, so we don't need to set it in the procedure. Also the whole byte array is passed to the procedure, so we don't need to calculate the addres in memory for each line.
+
+The rest of the code is quite easy to understand, I think, so I won't go into further details at the moment.
