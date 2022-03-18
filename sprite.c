@@ -30,7 +30,7 @@ void draw_spr(byte spr[8], int haddr) {
     for(i=0;i<8;i++) {
         byte* addr = (byte*)haddr;
         *addr = spr[i];
-        haddr=haddr+40;
+        haddr+=40;
     }
 }
 
@@ -40,7 +40,7 @@ void draw_char(byte cnum, int haddr) {
     for(i=0;i<8;i++) {
         byte* addr = (byte*)haddr;
         *addr = 64+chr[offst+i];
-        haddr=haddr+40;
+        haddr+=40;
     }
 }
 
@@ -50,7 +50,7 @@ void draw_achar(byte cnum, int haddr) {
     for(i=0;i<8;i++) {
         byte* addr = (byte*)haddr;
         *addr = 64+achr[offst+i];
-        haddr=haddr+40;
+        haddr+=40;
     }
 }
 
